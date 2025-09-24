@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<style>
+    
+    body {
+        font-family: 'Times New Roman', Times, serif;
+        background-image: url('czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0zODAtMDcta255Z2FwNmouanBn.webp');
+        background-size: cover;
+        background-repeat: no-repeat;
+
+
+    }
+    h1{
+        text-align: center;
+        color: whitesmoke;
+        padding: 30px;
+    
+    }
+table {
+            width: 100%;
+            margin-top: 30px;
+            background-color: transparent;
+           
+        }
+        th, td {
+            border: 1px solid rgb(238, 238, 234);
+            padding: 12px;
+            text-align: center;
+            color: whitesmoke;
+        }
+        th {
+            background-color: transparent;
+        }
+        tr {
+            background-color:transparent;
+        }
+      
+    
+</style>
+</head>
+<body>
+    <h1>JOKES TABLE</h1>
+    <table id="Jokes Table">
+    <thead>
+            <tr>
+        <th>TYPE</th>
+        <th>ID</th>
+        <th>SETUP</th>
+        <th>PUNCHLINE</th>            
+        </tr>
+    </thead>
+    <tbody id="jokes body"></tbody>
+    </table>
+    <script>
+        const apiUrl = "https://api.allorigins.win/raw?url=https://official-joke-api.appspot.com/jokes/ten";
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const tablebody = document.getElementById('jokes body');
+            data.forEach(joke => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${joke.type}</td>
+                    <td>${joke.id}</td>
+                    <td>${joke.setup}</td>
+                    <td>${joke.punchline}</td>
+                `;
+                tablebody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
